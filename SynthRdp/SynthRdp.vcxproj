@@ -5,7 +5,6 @@
     <RootNamespace>SynthRdp</RootNamespace>
     <MileProjectType>ConsoleApplication</MileProjectType>
     <MileProjectManifestFile>SynthRdp.manifest</MileProjectManifestFile>
-    <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
     <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
     <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
     <MileProjectFileDescription>Hyper-V Enhanced Session Proxy Service</MileProjectFileDescription>
@@ -27,6 +26,12 @@
   <Import Project="..\NanaRun.IconResource\NanaRun.IconResource.props" />
   <ItemDefinitionGroup>
     <ClCompile>
+      <RuntimeLibrary Condition="'$(UseDebugLibraries)' == 'true'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(UseDebugLibraries)' != 'true'">MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
       <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">NoExtensions</EnableEnhancedInstructionSet>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -42,6 +47,9 @@
     </PackageReference>
     <PackageReference Include="Mile.HyperV">
       <Version>1.2.1037</Version>
+    </PackageReference>
+    <PackageReference Include="VC-LTL">
+      <Version>5.3.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
